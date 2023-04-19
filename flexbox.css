@@ -1,0 +1,14 @@
+ nav {
+    border: 5px solid #fee2e2;
+    display: flex;
+    justify-content: space-around;
+
+    display: inline-flex
+}
+
+.container .search {}
+
+
+.container.logout{
+    
+}
