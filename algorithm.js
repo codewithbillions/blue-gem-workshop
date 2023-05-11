@@ -177,26 +177,175 @@
 // divide and Conquer 
 // must be sorted
 
-function binarySearch(arr, target){
-let leftIndex = 0;
-let rightIndex = arr.length -1
+// function binarySearch(arr, target){
+// let leftIndex = 0;
+// let rightIndex = arr.length -1
 
-while(leftIndex <= rightIndex) {
-    let middleIndex = Math.floor((leftIndex + rightIndex) / 2)
-    if(target === arr[middleIndex]) {
-        return middleIndex
-    }
-    if(target < arr[middleIndex]) {
-        rightIndex = middleIndex - 1
-    } else {
-        leftIndex = middleIndex + 1
-        }
-    }
-return -1
-}
+// while(leftIndex <= rightIndex) {
+//     let middleIndex = Math.floor((leftIndex + rightIndex) / 2)
+//     if(target === arr[middleIndex]) {
+//         return middleIndex
+//     }
+//     if(target < arr[middleIndex]) {
+//         rightIndex = middleIndex - 1
+//     } else {
+//         leftIndex = middleIndex + 1
+//         }
+//     }
+// return -1
+// }
 
-console.log(binarySearch([-5, 2, 4, 6, 10], 4))
-console.log(binarySearch([-5, 2, 4, 6, 10], 6))
-console.log(binarySearch([-5, 2, 4, 6, 10], 12))
+// console.log(binarySearch([-5, 2, 4, 6, 10], 4))
+// console.log(binarySearch([-5, 2, 4, 6, 10], 6))
+// console.log(binarySearch([-5, 2, 4, 6, 10], 12))
 
 //logarithmic - O(logn) which means input size reduced by half.
+
+// SORTING ALGORITHM
+// Bubble Sort
+// Insert Sort
+// Quick Sort
+// Merge Sort
+
+// Bubble Sort
+
+// PROBLEM STATEMENT: Given an array of Integers Sort the Array.
+// const arr = [-6, 20, 8, -2, 4]
+// passing the array in bubble sort function should return the array in an ascending order.
+// bubbleSort(arr) => Should return [-6, -2, 4, 8, 20]
+
+// Bubble sort idea.
+// Compare adjacent element in the array and swap the position if they are not in the intended order.
+
+
+
+// function bubbleSort(arr) {
+//     let swapped;
+//     do {
+//         swapped = false;
+//         for(let i = 0; i< arr.length; i++) {
+//             if(arr[i] > arr[i+1]) {
+//                 let temp = arr[i]
+//                 arr[i] = arr[i+1]
+//                 arr[i+1] = temp
+//                 swapped = true
+//             }
+//         }
+//     } while(swapped)
+// }
+
+// const arr = [-6, -2, 4, 8, 20, 9, 0 , 3, 6]
+// bubbleSort(arr)
+// console.log(arr) // [-6, -2, 4, 8, 20];
+
+// INSERT SORT
+// problem: Given an array of integers, sort the array.
+// const arr = [-6, 20, 8, -2, 4]
+// passing the array insertion function should return the array in ascending order.
+// insertionSort(arr) => Should return [-6, -2, 4, 8, 20]
+
+// INSERT SORT idea
+// lets first understand the idea of the insertion Sort
+// with insertion sort you first split the array into sorted and unsorted part.
+// Assume that the first element is already sorted  and the remaining unsorted.
+// Select an unsorted element and compare with all the elements in the sorted part.
+// if the elements in the sorted part is smaller than the selected element, proceed to the next element in the unsorted part. Else, shift larger element in the sorted part towards the right.
+
+// function insertionSort(arr) {
+//     for(let i = 0; i < arr.length; i++ ) {
+//         let numberToInsert = arr[i]
+//         let j = i -1
+//         while(j >= 0 && arr[j] > numberToInsert) {
+//             arr[j+1] = arr[j]
+//             j = j -1
+//         }
+//         arr[j+1] = numberToInsert
+//     }
+
+// }
+
+// const arr =[8, 20, -2, 4, -6]
+// insertionSort(arr)
+// console.log(arr)
+
+// >>>>>>>>>>>>>QUICK SORT
+// Problem: Given an array of integers, sort the array.
+
+// sorting can either be ascending or descending
+// const arr =[-6, -2, 4, 8, 20]
+// QuickSort(arr) => Should return [-6, -2, 4, 8, 20].
+
+// Quick sort idea
+// Identify the pivot element in the array
+// you have plenty of option to choose from, you can either 
+// - Pick first element as pivot
+// - Pick last element as pivot
+// - Pick a random element as pivot
+// - Pick median as pivot
+
+// then put everthing thats smaller than the pivot into the 'left' array and everything that's greater than pivot into the 'right' array.
+
+// Repeat the process for the individual 'left' and 'right' arrays till you have an array of length 1 which is sorted by definition.
+
+
+// function quickSort(arr) {
+//     if(arr.length < 2) {
+//         return arr;
+//     }
+
+//     let pivot = arr[arr.length -1]
+//     let left = []
+//     let right = []
+//     for (let i = 0; i < arr.length -1; i++) {
+//         if(arr[i] < pivot) {
+//             left.push(arr[i])
+//         } else {
+//             right.push(arr[i])
+//         }
+//     }
+//     return [...quickSort(left), pivot, ...quickSort(right)]
+// }
+
+//  const arr = [8, 20, -2, 4, -6]
+// console.log(quickSort(arr)) // [-6, -2, 4, 8, 20]
+// returns a sorted array.
+
+// worst case complexity is O(n^2)
+// average case is O(nlogn)
+
+// >>>>>>>>>>> MERGE SORT
+// Problem: Given an array of integers, sort the array.
+// sorting can either be ascending or descending
+// const arr = [-6, 20, 8, -2, 4]
+// MergeSort => Should return [-6, -2, 4, 8, 20].
+
+// Merge Sort idea
+// -divide the array into sub arrays, each containing only one element(An array with one element is considered sorted)
+// - repeatedly merge the sub arrays to produce new sorted sub-arrays until there is only one sub-array remaining. That will be the sorted array.
+
+
+function mergeSort(arr) {
+    if(arr.length < 2) {
+        return arr;
+    }
+    const mid = Math.floor(arr.length / 2)
+    const leftArr = arr.slice(0, mid)
+    const rightArr = arr.slice(mid)
+
+    return merge(mergeSort(leftArr), mergeSort(rightArr))
+}
+
+function merge(leftArr, rightArr) {
+const sortedArr = []
+    while(leftArr.length && rightArr.length) {
+        if(leftArr[0] <= rightArr.length) {
+            sortedArr.push(leftArr.shift())
+        } else {
+            sortedArr.push(rightArr.shift())
+        }
+    }
+    return [...sortedArr, ...leftArr, ...rightArr]
+}
+
+const arr = [8, 20, -2, 4, -6]
+console.log(mergeSort(arr))// [-6, -2, 4, 8, 20]
